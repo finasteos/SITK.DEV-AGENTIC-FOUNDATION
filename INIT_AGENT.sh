@@ -1,5 +1,5 @@
 #!/bin/bash
-# ARKITEKT Agent Initialization Script
+# SITK.DEV Agent Initialization Script
 # Usage: ./INIT_AGENT.sh <NAME> <ROLE> <TEMPLATE>
 
 NAME=$1
@@ -13,7 +13,7 @@ fi
 
 # Sanitize Name
 SAFE_NAME=$(echo "$NAME" | tr '[:lower:]' '[:upper:]' | tr ' ' '_')
-AGENT_DIR="ARKITEKT_FS/05__AGENTS/$SAFE_NAME"
+AGENT_DIR="SITK_FS/05__AGENTS/$SAFE_NAME"
 
 mkdir -p "$AGENT_DIR"
 
@@ -35,7 +35,7 @@ for FILE in "${SACRED_FILES[@]}"; do
     echo "Created: $(date -u)" >> "$FILEPATH"
     echo "Status: DEPLOYED" >> "$FILEPATH"
   elif [ "$FILE" == "SOUL.md" ]; then
-    echo "Core Directive: Execute tasks via Arkitekt protocol." >> "$FILEPATH"
+    echo "Core Directive: Execute tasks via SITK.DEV protocol." >> "$FILEPATH"
     echo "Template: $TEMPLATE" >> "$FILEPATH"
   else
     echo "Initialized via INIT_AGENT.sh at $(date -u)" >> "$FILEPATH"

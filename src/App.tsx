@@ -65,7 +65,7 @@ export default function App() {
                 exit={{ opacity: 0 }}
                 className="font-mono font-bold text-lg tracking-tighter"
               >
-                ARKITEKT <span className="text-[#555]">v3.1</span>
+                SITK.<span className="text-[#555]">DEV</span>
               </motion.div>
             )}
           </AnimatePresence>
@@ -155,7 +155,7 @@ export default function App() {
           <div className="flex items-center gap-6 text-[10px] font-mono text-[#444]">
             <div className="flex items-center gap-2 uppercase">
               <Database className="w-3 h-3" />
-              <span>ARKITEKT_FS READY</span>
+              <span>SITK_FS READY</span>
             </div>
             <div className="flex items-center gap-2 uppercase">
               <Monitor className="w-3 h-3" />

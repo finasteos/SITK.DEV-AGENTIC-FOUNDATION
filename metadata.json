@@ -1,6 +1,6 @@
 {
-  "name": "Arkitekt Project Scaffold",
-  "description": "Full-stack agentic management system with file serving, React Flow visualization, and real-time telemetry.",
+  "name": "SITK.DEV Agentic System",
+  "description": "Full-stack agentic management system under the SITK.DEV brand with file serving, React Flow visualization, and real-time telemetry.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }

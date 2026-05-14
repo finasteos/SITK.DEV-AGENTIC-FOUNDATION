@@ -56,7 +56,7 @@ export const AgentCreator = () => {
         <div>
           <h1 className="text-4xl font-bold tracking-tighter mb-4 text-white">Agent Conception</h1>
           <p className="text-[#888] font-mono text-xs uppercase tracking-widest leading-relaxed max-w-xl">
-            Synthesize new neural entities into the Arkitekt swarm. Define identity, core directives, and select a behavioral template for immediate deployment.
+            Synthesize new neural entities into the SITK.DEV swarm. Define identity, core directives, and select a behavioral template for immediate deployment.
           </p>
         </div>
 
@@ -113,27 +113,28 @@ export const AgentCreator = () => {
           {/* Templates Section */}
           <div className="space-y-6">
             <label className="text-[10px] font-mono text-[#555] uppercase tracking-widest ml-1">Behavioral Blueprint</label>
-            <div className="grid grid-cols-1 gap-4">
-              {templates.map((t) => (
-                <button
-                  key={t.id}
-                  type="button"
-                  onClick={() => setTemplate(t.id)}
-                  className={`flex items-start gap-4 p-4 rounded-xl border text-left transition-all ${
-                    template === t.id 
-                      ? 'bg-white/5 border-white border-opacity-30' 
-                      : 'bg-[#0a0a0a] border-[#1a1a1a] hover:border-[#333]'
-                  }`}
-                >
-                  <div className={`mt-1 p-2 rounded-lg ${template === t.id ? 'bg-white text-black' : 'bg-[#111] text-[#555]'}`}>
-                    <t.icon className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className={`text-xs font-bold uppercase tracking-tight ${template === t.id ? 'text-white' : 'text-[#888]'}`}>{t.id}</div>
-                    <div className="text-[10px] font-mono text-[#555] mt-1">{t.desc}</div>
-                  </div>
-                </button>
-              ))}
+            <div className="space-y-4">
+              <select 
+                value={template}
+                onChange={(e) => setTemplate(e.target.value)}
+                className="w-full bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl py-4 px-4 text-sm focus:border-white focus:outline-none appearance-none transition-all cursor-pointer text-white"
+              >
+                {templates.map((t) => (
+                  <option key={t.id} value={t.id} className="bg-[#0a0a0a]">
+                    {t.id.toUpperCase()} - {t.desc}
+                  </option>
+                ))}
+              </select>
+              
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                <div className="flex items-center gap-3 mb-2">
+                  {React.createElement(templates.find(t => t.id === template)?.icon || Zap, { className: "w-4 h-4 text-white" })}
+                  <span className="text-xs font-bold text-white uppercase tracking-tight">{template}</span>
+                </div>
+                <p className="text-[10px] font-mono text-[#555] leading-relaxed">
+                  {templates.find(t => t.id === template)?.desc}
+                </p>
+              </div>
             </div>
           </div>
         </form>

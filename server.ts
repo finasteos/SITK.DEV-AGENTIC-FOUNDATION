@@ -8,7 +8,7 @@ import { createServer as createViteServer } from "vite";
 const execAsync = promisify(exec);
 const PORT = 3000;
 const ROOT_DIR = process.cwd();
-const APP_DATA_DIR = path.join(ROOT_DIR, "ARKITEKT_FS");
+const APP_DATA_DIR = path.join(ROOT_DIR, "SITK_FS");
 
 async function bootstrap() {
   const dirs = [
@@ -49,7 +49,7 @@ async function bootstrap() {
       }
     }
   }
-  console.log("Arkitekt FS Bootstrapped at", APP_DATA_DIR);
+  console.log("SITK.DEV FS Bootstrapped at", APP_DATA_DIR);
 }
 
 async function startServer() {
@@ -172,7 +172,7 @@ async function startServer() {
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Arkitekt Server running on http://localhost:${PORT}`);
+    console.log(`SITK.DEV Server running on http://localhost:${PORT}`);
   });
 }
 
