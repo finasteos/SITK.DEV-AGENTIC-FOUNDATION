@@ -28,8 +28,9 @@ import { FileExplorer } from './components/FileExplorer';
 import { KanbanBoard } from './components/KanbanBoard';
 import { TelemetryView } from './components/TelemetryView';
 import { DashboardHome } from './components/DashboardHome';
+import { AgentCreator } from './components/AgentCreator';
 
-export type View = 'dashboard' | 'system-map' | 'terminal' | 'kanban' | 'telemetry';
+export type View = 'dashboard' | 'system-map' | 'terminal' | 'kanban' | 'telemetry' | 'creator';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<View>('dashboard');
@@ -41,6 +42,7 @@ export default function App() {
     { id: 'terminal', label: 'Arkitekt FS', icon: Terminal },
     { id: 'kanban', label: 'Active Flows', icon: ClipboardList },
     { id: 'telemetry', label: 'Telemetry', icon: Activity },
+    { id: 'creator', label: 'Laboratory', icon: Cpu },
   ];
 
   return (
@@ -143,6 +145,7 @@ export default function App() {
               {currentView === 'terminal' && <FileExplorer />}
               {currentView === 'kanban' && <KanbanBoard />}
               {currentView === 'telemetry' && <TelemetryView />}
+              {currentView === 'creator' && <AgentCreator />}
             </motion.div>
           </AnimatePresence>
         </div>

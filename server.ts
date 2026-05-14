@@ -1,8 +1,11 @@
 import express from "express";
 import path from "path";
 import fs from "fs/promises";
+import { exec } from "child_process";
+import { promisify } from "util";
 import { createServer as createViteServer } from "vite";
 
+const execAsync = promisify(exec);
 const PORT = 3000;
 const ROOT_DIR = process.cwd();
 const APP_DATA_DIR = path.join(ROOT_DIR, "ARKITEKT_FS");
@@ -120,6 +123,37 @@ async function startServer() {
       heartbeat: Math.random() > 0.1 ? "active" : "standby"
     }));
     res.json(data);
+  });
+
+  app.get("/api/agents", async (req, res) => {
+    try {
+      const agentsPath = path.join(APP_DATA_DIR, "05__AGENTS");
+      const entries = await fs.readdir(agentsPath, { withFileTypes: true });
+      const agents = entries
+        .filter(entry => entry.isDirectory())
+        .map(entry => ({ name: entry.name.replace("_", ""), id: entry.name }));
+      res.json(agents);
+    } catch (error) {
+      res.status(500).json({ error: String(error) });
+    }
+  });
+
+  app.post("/api/agents", async (req, res) => {
+    try {
+      const { name, role, template } = req.body;
+      if (!name || !role) return res.status(400).json({ error: "Name and role required" });
+
+      const safeName = name.toUpperCase().replace(/\s+/g, "_");
+      
+      // Trigger the shell script
+      const scriptPath = path.join(ROOT_DIR, "INIT_AGENT.sh");
+      await execAsync(`bash "${scriptPath}" "${name}" "${role}" "${template || "Standard"}"`);
+
+      res.json({ success: true, id: safeName });
+    } catch (error) {
+      console.error("Shell script error:", error);
+      res.status(500).json({ error: String(error) });
+    }
   });
 
   // Vite Integration
